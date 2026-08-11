@@ -14,7 +14,10 @@
     <nav aria-label="Main navigation">
       <a href="#research">Research</a><a href="#publications">Publications</a><a href="#profile">Profile</a><a href="#personal">Personal</a>
     </nav>
-    <a class="header-contact" href="mailto:gergely.hajdu@econ.muni.cz">Get in touch <span aria-hidden="true">↗</span></a>
+    <div class="header-actions">
+      <a class="header-contact" href="mailto:gergely.hajdu@econ.muni.cz">Get in touch <span aria-hidden="true">↗</span></a>
+      <button class="copy-email" type="button" aria-label="Copy Gergely Hajdu's email address"><span aria-hidden="true">⧉</span><span aria-live="polite">Copy email</span></button>
+    </div>
   </header>
 
   <section class="hero" id="top">
@@ -277,6 +280,26 @@
   backToTop.addEventListener("click", () => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  });
+
+  const copyEmail = document.querySelector(".copy-email");
+  copyEmail.addEventListener("click", async () => {
+    const email = "gergely.hajdu@econ.muni.cz";
+    try {
+      await navigator.clipboard.writeText(email);
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = email;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+      document.execCommand("copy");
+      area.remove();
+    }
+    const label = copyEmail.lastElementChild;
+    label.textContent = "Copied";
+    window.setTimeout(() => { label.textContent = "Copy email"; }, 1800);
   });
 
   document.addEventListener("click", async (event) => {
