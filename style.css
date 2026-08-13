@@ -128,6 +128,17 @@ h1 em { color:var(--blue); font-weight:400; }
 .profile-section { display:grid; grid-template-columns:1fr 1fr; gap:clamp(60px,10vw,150px); padding:120px max(24px,calc((100vw - 1400px)/2)); background:var(--white); }
 .profile-intro h2 { max-width:650px; margin-bottom:30px; }
 .profile-intro>p:not(.eyebrow) { max-width:630px; margin-bottom:34px; color:var(--muted); font-size:17px; line-height:1.7; }
+.profile-actions { display:grid; gap:24px; justify-items:start; }
+.profile-network { width:100%; max-width:630px; }
+.profile-links-label { margin:0 0 10px; color:var(--muted); font-size:10px; font-weight:730; letter-spacing:.13em; text-transform:uppercase; }
+.profile-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); border-top:1px solid var(--line); border-left:1px solid var(--line); }
+.profile-links a { display:flex; gap:14px; align-items:center; justify-content:space-between; min-height:68px; padding:12px 14px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); transition:background 160ms ease,color 160ms ease; }
+.profile-links a>span { display:grid; gap:4px; min-width:0; }
+.profile-links strong { font-size:12px; }
+.profile-links small { overflow-wrap:anywhere; color:var(--muted); font-size:10px; line-height:1.25; transition:color 160ms ease; }
+.profile-links b { font-size:14px; font-weight:500; }
+.profile-links a:hover { background:var(--blue); color:var(--white); }
+.profile-links a:hover small { color:rgba(255,255,255,.75); }
 .profile-facts { border-top:1px solid var(--line); }
 .profile-facts div { display:grid; grid-template-columns:120px 1fr; padding:26px 0; border-bottom:1px solid var(--line); }
 .profile-facts span { grid-row:1/3; color:var(--blue); font-size:12px; font-weight:700; }
@@ -197,7 +208,7 @@ footer .eyebrow { color:var(--lime); }
   .publication-abstract { grid-template-columns:1fr; }
   .citation-actions { grid-column:1; align-items:flex-start; justify-self:start; width:100%; margin-top:12px; }
   .citation-actions>a,.bibtex-button { width:min(100%,220px); }
-  .personal-section { grid-template-columns:1fr; }
+  .profile-links { grid-template-columns:1fr; }\n  .personal-section { grid-template-columns:1fr; }
   .personal-links { grid-template-columns:1fr; }
   footer { grid-template-columns:1fr; align-items:start; }
   .footer-bottom { margin-top:25px; }
