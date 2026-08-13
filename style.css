@@ -58,12 +58,9 @@ h1 em { color:var(--blue); font-weight:400; }
 .flip-hint { display:flex; gap:9px; align-items:center; margin:-36px 0 30px; color:#4c5a6c; font-size:12px; font-weight:650; }
 .flip-hint span { display:grid; place-items:center; width:25px; height:25px; border:1px solid rgba(52,81,178,.28); border-radius:50%; color:var(--blue); font-size:15px; }
 .work-grid { display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid rgba(24,37,54,.16); border-left:1px solid rgba(24,37,54,.16); }
-.work-card { position:relative; height:560px; overflow:hidden; border-right:1px solid rgba(24,37,54,.16); border-bottom:1px solid rgba(24,37,54,.16); background:transparent; cursor:pointer; perspective:1200px; transform:translateZ(0); transition:box-shadow 220ms ease,transform 220ms ease; }
+.work-card { position:relative; height:560px; overflow:hidden; border-right:1px solid rgba(24,37,54,.16); border-bottom:1px solid rgba(24,37,54,.16); background:transparent; cursor:pointer; perspective:1200px; }
 .work-card-inner { display:grid; width:100%; height:100%; transform-style:preserve-3d; will-change:transform; transition:transform 820ms cubic-bezier(.18,.78,.22,1); }
 .work-card.is-flipped .work-card-inner { transform:rotateY(180deg); }
-.work-card.is-turning { z-index:2; box-shadow:0 24px 48px rgba(24,37,54,.2); transform:translateY(-4px); }
-.work-card:not(.is-flipped):not(.is-turning):hover .work-card-inner { transform:rotateY(-5deg); }
-.work-card.is-flipped:not(.is-turning):hover .work-card-inner { transform:rotateY(185deg); }
 .work-card-face { grid-area:1/1; display:flex; flex-direction:column; min-width:0; min-height:0; height:100%; padding:32px; overflow:hidden; background:rgba(255,255,255,.7); backface-visibility:hidden; -webkit-backface-visibility:hidden; }
 .work-card-back { transform:rotateY(180deg); background:var(--white); }
 .work-card.featured .work-card-face { background:var(--blue); color:var(--white); }

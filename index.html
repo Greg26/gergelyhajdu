@@ -367,15 +367,8 @@
     const back = card.querySelector(".work-card-back");
     const toggles = card.querySelectorAll(".flip-card-toggle");
 
-    let turnTimer;
     const setFlipped = (flipped, moveFocus = false) => {
-      window.clearTimeout(turnTimer);
-      card.classList.add("is-turning");
       card.classList.toggle("is-flipped", flipped);
-      turnTimer = window.setTimeout(
-        () => card.classList.remove("is-turning"),
-        reduceCardMotion ? 0 : 830
-      );
       card.dataset.flipped = String(flipped);
       front.setAttribute("aria-hidden", String(flipped));
       back.setAttribute("aria-hidden", String(!flipped));
@@ -396,7 +389,6 @@
     back.setAttribute("inert", "");
     card.addEventListener("click", (event) => {
       if (event.target.closest("a")) return;
-      if (card.classList.contains("is-flipped") && event.target.closest(".card-abstract")) return;
       const toggle = event.target.closest(".flip-card-toggle");
       const flipped = card.classList.contains("is-flipped");
       setFlipped(!flipped, Boolean(toggle));
