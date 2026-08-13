@@ -367,8 +367,15 @@
     const back = card.querySelector(".work-card-back");
     const toggles = card.querySelectorAll(".flip-card-toggle");
 
+    let turnTimer;
     const setFlipped = (flipped, moveFocus = false) => {
+      window.clearTimeout(turnTimer);
+      card.classList.add("is-turning");
       card.classList.toggle("is-flipped", flipped);
+      turnTimer = window.setTimeout(
+        () => card.classList.remove("is-turning"),
+        reduceCardMotion ? 0 : 1630
+      );
       card.dataset.flipped = String(flipped);
       front.setAttribute("aria-hidden", String(flipped));
       back.setAttribute("aria-hidden", String(!flipped));
@@ -378,7 +385,7 @@
 
       if (moveFocus) {
         const destination = (flipped ? back : front).querySelector(".flip-card-toggle");
-        window.setTimeout(() => destination.focus(), reduceCardMotion ? 0 : 830);
+        window.setTimeout(() => destination.focus(), reduceCardMotion ? 0 : 1630);
       }
     };
 
