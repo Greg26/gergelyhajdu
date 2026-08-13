@@ -361,7 +361,7 @@
   }
 
   const workCards = document.querySelectorAll(".work-card");
-  const reduceCardMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cardTurnDuration = 2000;
   workCards.forEach((card) => {
     const front = card.querySelector(".work-card-front");
     const back = card.querySelector(".work-card-back");
@@ -374,7 +374,7 @@
       card.classList.toggle("is-flipped", flipped);
       turnTimer = window.setTimeout(
         () => card.classList.remove("is-turning"),
-        reduceCardMotion ? 0 : 1630
+        cardTurnDuration + 30
       );
       card.dataset.flipped = String(flipped);
       front.setAttribute("aria-hidden", String(flipped));
@@ -385,7 +385,7 @@
 
       if (moveFocus) {
         const destination = (flipped ? back : front).querySelector(".flip-card-toggle");
-        window.setTimeout(() => destination.focus(), reduceCardMotion ? 0 : 1630);
+        window.setTimeout(() => destination.focus(), cardTurnDuration + 30);
       }
     };
 
