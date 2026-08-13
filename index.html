@@ -12,7 +12,7 @@
   <header class="site-header">
     <div class="brand">
       <a class="wordmark" href="#top" aria-label="Gergely Hajdu, home">Gergely Hajdu<span>.</span></a>
-      <button class="pronounce-name" type="button" aria-label="Hear Gergely pronounced in Hungarian" title="Hear the Hungarian pronunciation of Gergely"><span aria-hidden="true">▶</span><span class="pronounce-label" aria-live="polite">Hear name</span></button>
+      <button class="pronounce-name" type="button" data-lang="hu-HU" aria-label="Hear Gergely pronounced in Hungarian" title="Hear the Hungarian pronunciation of Gergely"><span aria-hidden="true">▶</span><span class="pronounce-label" aria-live="polite">Hear name</span></button>
     </div>
     <nav aria-label="Main navigation">
       <a href="#research">Research</a><a href="#publications">Publications</a><a href="#profile">Profile</a><a href="#personal">Personal</a>
@@ -294,7 +294,7 @@
     pronounceName.addEventListener("click", () => {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance("Gergely");
-      utterance.lang = "hu-HU";
+      utterance.lang = pronounceName.dataset.lang;
       utterance.rate = 0.82;
       const hungarianVoice = window.speechSynthesis.getVoices().find((voice) =>
         /^hu(?:-|_)/i.test(voice.lang)
