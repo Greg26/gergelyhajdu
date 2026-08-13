@@ -10,7 +10,10 @@
 <body>
 <main>
   <header class="site-header">
-    <a class="wordmark" href="#top" aria-label="Gergely Hajdu, home">GH<span>.</span></a>
+    <div class="brand">
+      <a class="wordmark" href="#top" aria-label="Gergely Hajdu, home">Gergely Hajdu<span>.</span></a>
+      <button class="pronounce-name" type="button" aria-label="Hear Gergely pronounced in Hungarian" title="Hear the Hungarian pronunciation of Gergely"><span aria-hidden="true">▶</span><span class="pronounce-label" aria-live="polite">Hear name</span></button>
+    </div>
     <nav aria-label="Main navigation">
       <a href="#research">Research</a><a href="#publications">Publications</a><a href="#profile">Profile</a><a href="#personal">Personal</a>
     </nav>
@@ -281,6 +284,29 @@
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
   });
+
+  const pronounceName = document.querySelector(".pronounce-name");
+  const pronounceLabel = pronounceName.querySelector(".pronounce-label");
+  if (!("speechSynthesis" in window)) {
+    pronounceName.disabled = true;
+    pronounceName.title = "Audio pronunciation is not supported in this browser";
+  } else {
+    pronounceName.addEventListener("click", () => {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance("Gergely");
+      utterance.lang = "hu-HU";
+      utterance.rate = 0.82;
+      const hungarianVoice = window.speechSynthesis.getVoices().find((voice) =>
+        /^hu(?:-|_)/i.test(voice.lang)
+      );
+      if (hungarianVoice) utterance.voice = hungarianVoice;
+      const resetLabel = () => { pronounceLabel.textContent = "Hear name"; };
+      utterance.addEventListener("end", resetLabel, { once: true });
+      utterance.addEventListener("error", resetLabel, { once: true });
+      pronounceLabel.textContent = "Playing";
+      window.speechSynthesis.speak(utterance);
+    });
+  }
 
   const copyEmail = document.querySelector(".copy-email");
   copyEmail.addEventListener("click", async () => {
